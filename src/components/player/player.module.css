@@ -1,0 +1,23 @@
+.container:is(:nth-child(1),:nth-child(2),:nth-child(3)){
+    font-size: 32px;
+    color: #F8BC2A;
+}
+.container{
+    background-color: #323233;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px;
+    padding: 8px;
+    gap: 8px;
+}
+.block{
+    width: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom:0%;
+    left: 1%;
+    z-index: 503;
+}

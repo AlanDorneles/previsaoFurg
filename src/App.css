@@ -1,0 +1,23 @@
+#root{
+    font-family: "Lato Regular", sans-serif;
+    min-height: 100vh;
+    display: flex;
+}
+body{
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.is-primary{
+    background-color: #F8BC2A !important;
+    font-weight: 700;
+}
+
+hr{
+    background-color: #fddd8b !important;
+}
+
+
