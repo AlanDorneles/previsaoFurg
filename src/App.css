@@ -11,10 +11,6 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
-.is-primary{
-    background-color: #F8BC2A !important;
-    font-weight: 700;
-}
 
 hr{
     background-color: #fddd8b !important;

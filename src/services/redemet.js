@@ -1,4 +1,4 @@
-import { apiKey } from "../constants/constants"
+import { apiKeyRedeMet} from "../constants/constants"
 
 
 
@@ -13,7 +13,7 @@ export const getRadarInformation = async () => {
         actualHour = actualHour - 24
         actualDay = actualDay + 1
       }
-      const response = await fetch(`https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${actualDay}${actualHour}`);
+      const response = await fetch(`https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${actualHour}`);
       if (!response.ok) {
         throw new Error('Não foi possível obter dados do radar');
       }

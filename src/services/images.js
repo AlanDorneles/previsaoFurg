@@ -1,25 +1,29 @@
-import { apiKey } from "../constants/constants";
+import { apiKeyRedeMet} from "../constants/constants";
 
 export const getImages = async () => {
   const listImage = []; // array de urls
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
   try {
-    const currentHour = new Date().getHours() + 3;
-    const actualDay = new Date().getDate();
-    const actualYear = new Date().getFullYear();
-    const actualMonth = new Date().getMonth() + 1;
-    let initialHour = currentHour - hoursSetting; // hora inicial
+    const currentHour = new Date().getHours() + 3; //UTC
+    const actualDay = new Date().getDate(); //DIA
+    const actualYear = new Date().getFullYear(); //ANO
+    const actualMonth = new Date().getMonth() + 1; //MES
+    let initialHour = currentHour - hoursSetting; // HORA INICIAL
 
+    //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
-      console.log("hora inicial maior que 0");
+      console.log("BUSCA INICIA NO DIA ATUAL");
+      //BUSCA VAI SER FEITA EM DUAS PARTES (DIA ATUAL E DIA SEGUINTE) POR CONTA DO UTC 
       if (currentHour > 23) {
         console.log("hora de agora maior que 23", currentHour);
-        console.log("hora inicial ", currentHour - hoursSetting);
+        const hourLastDay = currentHour - hoursSetting
+        console.log("hora inicial ", hourLastDay);
+        console.log('dia inicial', actualDay)
 
-        for (let h = currentHour - hoursSetting; h <= 23; h++) {
-          //percorre da hora inicial até a hora atual
+        //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
+        for (let h = hourLastDay; h <= 23; h++) {
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${actualDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -40,10 +44,11 @@ export const getImages = async () => {
         const nextDay = actualDay + 1;
         const newHour = currentHour - 23;
         console.log("hora final", newHour);
+        console.log("dia final", nextDay);
         for (let h = 0; h <= newHour; h++) {
           //percorre da hora inicial até a hora atual
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${nextDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${nextDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -59,13 +64,14 @@ export const getImages = async () => {
             });
           }
         }
-      } //se a hora inicial for maior que 0 isso signifca que o escopo é do mesmo dia
+      } 
+      //BUSCA ACONTECE NO MESMO DIA 
       else {
         for (let h = initialHour; h <= currentHour; h++) {
 
           //percorre da hora inicial até a hora atual
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${actualDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -84,17 +90,19 @@ export const getImages = async () => {
         }
       }
     }
-
+    //BUSCA ACONTECE NO DIA ANTERIOR
     if (initialHour < 0) {
-      // se a hora inicial for menor que 0 significa que o escopo pegará horas do dia anterior
       const previousDay = actualDay - 1; //Dia anterior
-      initialHour = 24 - initialHour; // Hora inicial do dia anterior
+      console.log(initialHour)
+      initialHour = 24 + initialHour; // Hora inicial do dia anterior
+      console.log('hora inicial:',initialHour)
+      console.log('dia inicial:', previousDay)
 
-      //LOOP DE IMAGENS DO DIA ANTERIOR
+      //percorre da hora inicial até a ultima hora do dia ANTERIOR em UTC ( +3horas)
       for (let h = initialHour; h <= 23; h++) {
-        //percorre o loop até a ultima hora do dia anterior
+        
         const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${previousDay}${h}`
+          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${previousDay}${h}`
         );
         if (!response.ok) {
           throw new Error("Não foi possível obter dados do radar");
@@ -110,11 +118,13 @@ export const getImages = async () => {
         }
       }
 
-      //LOOP DAS IMAGENS DO DIA ATUAL
+      
+      //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
       for (let h = 0; h <= currentHour; h++) {
-        //percorre o loop até a ultima imagem do dia atual
+        console.log('hora final:',currentHour)
+        console.log('dia inicial:', actualDay)
         const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKey}&data=${actualYear}${actualMonth}${actualDay}${h}`
+          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
         );
         if (!response.ok) {
           throw new Error("Não foi possível obter dados do radar");
