@@ -12,21 +12,23 @@ export const DataINMET = async () => {
   const data = await response.json();
 
   const windDegreesToDirection = (degree) => {
-    if (degree > 0 && degree < 45) {
+     let degreeNumber = Number(degree.VEN_DIR)
+     console.log(degreeNumber)
+    if (degreeNumber > 0 && degreeNumber < 45) {
         return "NORTE";
-    } else if (degree >= 45 && degree < 90) {
+    } else if (degreeNumber >= 45 && degreeNumber < 90) {
         return "NORDESTE";
-    } else if (degree >= 90 && degree < 135) {
+    } else if (degreeNumber >= 90 && degreeNumber < 135) {
         return "LESTE";
-    } else if (degree >= 135 && degree < 180) {
+    } else if (degreeNumber >= 135 && degreeNumber < 180) {
         return "SUDESTE";
-    } else if (degree >= 180 && degree < 225) {
+    } else if (degreeNumber >= 180 && degreeNumber < 225) {
         return "SUL";
-    } else if (degree >= 225 && degree < 270) {
+    } else if (degreeNumber >= 225 && degreeNumber < 270) {
         return "SUDOESTE";
-    } else if (degree >= 270 && degree < 315) {
+    } else if (degreeNumber >= 270 && degreeNumber < 315) {
         return "OESTE";
-    } else if (degree >= 315 && degree < 360) {
+    } else if (degreeNumber >= 315 && degreeNumber < 360) {
         return "NOROESTE";
     } else {
         return "NORTE"; // Caso o valor seja 360 graus (o equivalente a 0 graus)

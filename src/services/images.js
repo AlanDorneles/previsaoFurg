@@ -32,7 +32,9 @@ export const getImages = async () => {
 
           const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
           const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          if (morroDaIgreja && cangucu) {
+          const santiago = data.data.radar[0].find((item) => item.id === 34);
+
+          if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
               // coloca o objeto com as url's de imagem de radar em listImage
               morroDaIgreja: morroDaIgreja.path,
@@ -56,11 +58,13 @@ export const getImages = async () => {
           const data = await response.json();
           const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
           const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          if (morroDaIgreja && cangucu) {
+          const santiago = data.data.radar[0].find((item) => item.id === 34);
+          if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
               // coloca o objeto com as url's de imagem de radar em listImage
               morroDaIgreja: morroDaIgreja.path,
               cangucu: cangucu.path,
+              santiago: santiago.path
             });
           }
         }
@@ -79,11 +83,13 @@ export const getImages = async () => {
           const data = await response.json();
           const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
           const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          if (morroDaIgreja && cangucu) {
+          const santiago = data.data.radar[0].find((item) => item.id === 34);
+          if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
               // coloca o objeto com as url's de imagem de radar em listImage
               morroDaIgreja: morroDaIgreja.path,
               cangucu: cangucu.path,
+              santiago:santiago.path
             });
           }
           console.log(morroDaIgreja.path)
@@ -110,10 +116,17 @@ export const getImages = async () => {
         const data = await response.json();
         const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
         const cangucu = data.data.radar[0].find((item) => item.id === 8);
-        if (morroDaIgreja && cangucu) {
+        const santiago = data.data.radar[0].find((item) => item.id === 34);
+        
+
+
+        if (morroDaIgreja && cangucu && santiago) {
+          console.log('ok')
           listImage.push({
             morroDaIgreja: morroDaIgreja.path,
             cangucu: cangucu.path,
+            santiago: santiago.path
+
           });
         }
       }
@@ -132,10 +145,13 @@ export const getImages = async () => {
         const data = await response.json();
         const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
         const cangucu = data.data.radar[0].find((item) => item.id === 8);
-        if (morroDaIgreja && cangucu) {
+        const santiago = data.data.radar[0].find((item) => item.id === 34);
+
+        if (morroDaIgreja && cangucu && santiago) {
           listImage.push({
             morroDaIgreja: morroDaIgreja.path,
             cangucu: cangucu.path,
+            santiago: santiago.path
           });
         }
       }

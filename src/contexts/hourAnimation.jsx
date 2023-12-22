@@ -9,8 +9,6 @@ export const HourScopeProvider = ({ children }) => {
   const handleSelectChange = (selectedValue) => {
     setHourScope(selectedValue);
   };
-
-  console.log(getHourScope);
   localStorage.setItem("hourScope", getHourScope)
 
   return (

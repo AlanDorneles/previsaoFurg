@@ -1,15 +1,21 @@
 import "./App.css";
-import '../node_modules/bulma/css/bulma.min.css'
+import "../node_modules/bulma/css/bulma.min.css";
 import { Root } from "./routes/routes";
 import { HourScopeProvider } from "./contexts/hourAnimation";
+import { RadarIsCheckedProvider } from "./contexts/radarIsChecked";
+import { PreviousAndNextImageProvider } from "./contexts/previousAndNextImage";
 
 function App() {
   return (
-    <main className="container" style={{ maxWidth:"100vw"}}>
+    <main className="container" style={{ maxWidth: "100vw" }}>
       <HourScopeProvider>
-        <Root/>
+        <RadarIsCheckedProvider>
+          <PreviousAndNextImageProvider>
+          <Root />
+          </PreviousAndNextImageProvider>
+        </RadarIsCheckedProvider>
       </HourScopeProvider>
-    </main> 
+    </main>
   );
 }
 export default App;

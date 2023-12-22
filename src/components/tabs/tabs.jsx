@@ -12,12 +12,12 @@ export const Tabs = ({ activeTab, onClick }) => {
       <ul>
         <li className={activeTab === 0 ? "is-active" : ""}>
           <a onClick={() => handleTabClick(0)}>
-            <span>Radar</span>
+            <span>CARDS</span>
           </a>
         </li>
         <li className={activeTab === 1 ? "is-active" : ""}>
           <a onClick={() => handleTabClick(1)}>
-            <span>Dados</span>
+            <span>GRÁFICOS</span>
           </a>
         </li>
       </ul>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types'; 
 import styles from  './player.module.css'
 
-export const Player = ({playGif, pauseGif}) => {
+export const Player = ({playGif, pauseGif, nextImage, previousImage}) => {
     const [isPlay, setIsPlay] = useState(true)
 
     const handleToggleIcon= () => {
@@ -13,13 +13,17 @@ export const Player = ({playGif, pauseGif}) => {
             setIsPlay(false)
         }
     }
+
+    
+    
+     
     return(
     <div className={`block ${styles.block}`}>
         <div className={styles.container}>
-            <IoPlayBack/>
-            {isPlay ? <IoPlayCircleSharp onClick={() => {playGif(), handleToggleIcon()}}/>
-            : <IoPauseCircleSharp onClick={() => {handleToggleIcon(), pauseGif()}}/>}
-            <IoPlayForward/>
+            <IoPlayBack onClick={previousImage} className={styles.previous}/>
+            {isPlay? <IoPlayCircleSharp onClick={() => {playGif(), handleToggleIcon()}} className={styles.play}/>
+            : <IoPauseCircleSharp onClick={() => {handleToggleIcon(), pauseGif()}} className={styles.pause}/>}
+            <IoPlayForward onClick={nextImage} className={styles.next}/>
         </div>
     </div>
     )
@@ -27,5 +31,7 @@ export const Player = ({playGif, pauseGif}) => {
 
 Player.propTypes = {
     playGif:PropTypes.func,
-    pauseGif:PropTypes.func
+    pauseGif:PropTypes.func,
+    nextImage:PropTypes.func,
+    previousImage:PropTypes.func,
 }

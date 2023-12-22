@@ -15,5 +15,7 @@ body{
 hr{
     background-color: #fddd8b !important;
 }
-
+.radio + .radio {
+    margin:0 !important
+}
 

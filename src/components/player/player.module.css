@@ -2,6 +2,15 @@
     font-size: 32px;
     color: #F8BC2A;
 }
+.previous:hover ,
+.next:hover,
+.play:hover,
+.pause:hover{
+    filter: drop-shadow(1px 1px 3px #F8BC2A);
+    cursor:pointer
+
+
+}
 .container{
     background-color: #323233;
     align-items: center;

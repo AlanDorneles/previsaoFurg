@@ -20,8 +20,11 @@ export const getRadarInformation = async () => {
       const data = await response.json();
       const morroDaIgreja = data.data.radar[0].find(item => item.id === 16);
       const cangucu = data.data.radar[0].find(item => item.id === 8)
+      const santiago = data.data.radar[0].find( item=> item.id === 34)
+
+      console.log(santiago)
       
-    return {cangucu,morroDaIgreja}
+    return {cangucu,morroDaIgreja, santiago}
     
     } catch (error) {
       console.error('Erro ao obter os dados do radar:', error);
