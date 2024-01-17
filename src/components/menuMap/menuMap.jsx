@@ -9,7 +9,7 @@ import { UsePreviousAndNextImage } from "../../contexts/previousAndNextImage";
 export const MenuMap = ({ selectImage }) => {
   const { getHourScope, handleSelectChange } = useHourScope();
   const actualHour = new Date().getHours();
-  const [initHour, setInitHour] = useState();
+  const [initHour, setInitHour] = useState(6);
   const [clickedButtonId, setClickedButtonId] = useState();
   const {handleCangucuChange, handleMorroDaIgrejaChange,handleSantiagoChange, cangucuChecked,morroDaIgrejaChecked,santiagoChecked} = UseRadarIsChecked()
   const {setClickHoursIndexImage,indexImage}= UsePreviousAndNextImage()
@@ -18,6 +18,7 @@ export const MenuMap = ({ selectImage }) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
     const initIndex = actualHour - selectedValue;
+    
     if (initIndex < 0) {
       initIndex * -1;
       setInitHour(initIndex);
@@ -30,7 +31,7 @@ export const MenuMap = ({ selectImage }) => {
     setClickHoursIndexImage(index)
     selectImage();
     console.log('indice da imagem MenuMap',indexImage)
-    setClickedButtonId(indexImage+1);
+    setClickedButtonId(indexImage);
   };
 
   return (

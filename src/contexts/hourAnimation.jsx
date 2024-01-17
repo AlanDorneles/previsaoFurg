@@ -11,6 +11,7 @@ export const HourScopeProvider = ({ children }) => {
   };
   localStorage.setItem("hourScope", getHourScope)
 
+
   return (
     <HourScopeContext.Provider value={{ getHourScope, handleSelectChange }}>
       {children}

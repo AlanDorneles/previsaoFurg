@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import logoFurg from "../../../public/logo-furg.png";
 import { IoHomeOutline } from "react-icons/io5";
 import { AiOutlineRadarChart } from "react-icons/ai";
-import { FaCloudSunRain } from "react-icons/fa";
+import { RiBaseStationLine } from "react-icons/ri";
+import { GiSattelite } from "react-icons/gi";
+import '../../sass/navbar.scss'
 
 
 import { useState } from "react";
@@ -16,8 +18,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className="navbar"
-      style={{ backgroundColor: "#323233", padding: "0 1rem", height: "56px" }}
+      className={`navbar `}
     >
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
@@ -35,19 +36,22 @@ export const Navbar = () => {
 
       <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
         <div className="navbar-start">
-          <Link to="/home" className="navbar-item">
+          <Link to="/" className={`navbar-item ` }>
             <IoHomeOutline/>
               Home
           </Link>
-          <Link to="/radar" className="navbar-item">
+          <Link to="/radar" className={`navbar-item` }>
             <AiOutlineRadarChart />
 
               Radar
           </Link>
-          <Link to="/clima" className="navbar-item">
-            <FaCloudSunRain />
-
-              Clima
+          <Link to="/estacao" className={`navbar-item` }>
+            <RiBaseStationLine />
+              Estações
+          </Link>
+          <Link to="/satelite" className={`navbar-item`}>
+          <GiSattelite/>
+            Satélite
           </Link>
         </div>
       </div>

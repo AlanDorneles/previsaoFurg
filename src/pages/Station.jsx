@@ -1,247 +1,75 @@
-import { getRadarInformation } from "../services/redemet.js";
-import { DataINMETAPI } from "../services/inmet.js";
-import { useEffect, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Circle,
-  Pane,
-  ImageOverlay,
-  /*Rectangle,*/ Marker,
-  Tooltip,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { MenuMap } from "../components/menuMap/menuMap.jsx";
-import { Player } from "../components/player/player.jsx";
-import { HourScopeProvider, useHourScope } from "../contexts/hourAnimation.jsx";
-import { getImages } from "../services/images.js";
-import { customMarkerIcon, iconStation } from "../components/marker/marker.jsx";
-import { circleOptions } from "../constants/constants.js";
-import { FilterTypeRadar } from "../components/filterTypeRadar/filterTypeRadar.jsx";
-import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
-import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
-import { useStationsVisible } from "../contexts/radarFilter.jsx";
+import { MapContainer, Marker, Tooltip,TileLayer, Rectangle } from "react-leaflet";
 import { useCodeStation } from "../contexts/codeStation.jsx";
-import { Card } from "../components/card/Card.jsx";
-import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
-import { MdClose } from "react-icons/md";
-import { GraphicPressure } from "../components/chart/chartPressure.jsx";
-import { MenuStation } from "../components/menuStation/MenuStation.jsx";
+import { MenuStation } from "../components/menuStation/MenuStation";
+import { iconStation } from "../components/marker/marker.jsx";
+import { useEffect, useState } from "react";
+import { DataStationsAPI } from "../services/inmetStations.js";
+import Modal from "../components/modal/Modal.jsx";
 
-
-export default function Radar() {
-  const [morroDaIgreja, setMorroDaIgreja] = useState("");
-  const [cangucu, setCangucu] = useState("");
-  const [santiago, setSantiago] = useState("");
-  const [handlerSrc, setHandlerSrc] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [images, setImages] = useState([]);
-  const [count, setCount] = useState(0);
-  const { cangucuChecked, morroDaIgrejaChecked, santiagoChecked } =
-    UseRadarIsChecked();
-  const { indexImage, handleNextImage, handlePreviousImage } =
-    UsePreviousAndNextImage();
-  const { getHourScope } = useHourScope();
-  const { stationsVisible } = useStationsVisible();
+export default function Station() {
   const { codeStation, setCodeStation } = useCodeStation();
-  const { typeRadar } = useFilterTypeRadarContext();
-  const [clicked, setClicked] = useState(false)
-  const [dataINMET, setDataINMET] = useState([])
-
-  const handlerSrcFunc = () => {
-    if (handlerSrc === false) {
-      setHandlerSrc(true);
-    } else {
-      setHandlerSrc(false);
-    }
-  };
-  console.log(typeRadar);
-
-  const boundsMorroDaIgreja = [
-    [-24.5, -53.5],
-    [-31.7, -45.5],
-  ];
-  const boundsCangucu = [
-    [-27.8, -57],
-    [-35, -48.5],
-  ];
-
-  const boundsSantiago = [
-    [-25.6, -59.1],
-    [-32.8, -50.8],
-  ];
-
-  useEffect(() => {
-
-        console.log('Estado "clicked" foi alterado:', clicked);
-      }, [clicked]);
-
-
- const handleClickModal =  () => {
-        setClicked(true)
-        console.log(clicked)
-
-  }
-
-  const handleCloseModal = () => {
-        setClicked(false)
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const radarInformation = await getRadarInformation();
-        setMorroDaIgreja(radarInformation.morroDaIgreja);
-        setCangucu(radarInformation.cangucu);
-        setSantiago(radarInformation.santiago);
-      } catch (error) {
-        console.error("Erro ao obter informações do radar:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dataINMET = await DataINMETAPI()
-        setDataINMET(dataINMET)
-      } catch (error) {
-        console.error("Erro ao obter informações do radar:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const playImages = async () => {
-    const images = await getImages();
-    setImages(images);
-    console.log(images);
-
-    let currentIndex = 0; // Use o índice atual de imagem como ponto de partida
-    handlerSrcFunc();
-
-    const intervalId = setInterval(() => {
-      setCurrentImageIndex(currentIndex);
-      currentIndex = (currentIndex + 1) % images.length;
-      if (currentIndex === currentImageIndex) {
-        clearInterval(intervalId);
-      }
-    }, 400);
-  };
-
-  const pauseGif = () => {
-    setHandlerSrc(false);
-    setCurrentImageIndex(0);
-  };
-
-  const nextImage = () => {
-    handleNextImage(count);
-    setCount(count + 1);
-
-    if (count >= images.length - 2) {
-      setCount(0);
-    }
-    localStorage.setItem("imageId", count);
-    setCurrentImageIndex(count); //GATILHO PARA MUDANÇA DE IMAGEM
-  };
-
-  const previousImage = () => {
-    handlePreviousImage(count);
-    if (count <= 0) {
-      setCount(getHourScope);
-    } else {
-      setCount(count - 1);
-      setCurrentImageIndex(count - 1); ///GATILHO PARA MUDANÇA DE IMAGEM
-      console.log("OK");
-    }
-  };
-
-  const handleSelectImage = () => {
-    setCurrentImageIndex(indexImage + 1);
-  };
-
+  const [data,setData] = useState([])
   const handleClickMarker = (event) => {
     const { id } = event.target.options;
     console.log(`Clicou no Marker com id: ${id}`);
     setCodeStation(id);
     console.log(codeStation);
   };
+
+  const bounds = [[-56, -100], 
+  [12.52, -25.24]]
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await DataStationsAPI();
+        setData(data)
+        console.log(data)
+        
+      } catch (error) {
+        console.error("Erro ao obter informações do radar:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data)
   return (
     <>
-      <HourScopeProvider>
-        <MenuMap selectImage={handleSelectImage} />
-      </HourScopeProvider>
-      <Player
-        playGif={playImages}
-        onClick={handlerSrcFunc}
-        pauseGif={pauseGif}
-        nextImage={nextImage}
-        previousImage={previousImage}
-      />
-      <MapContainer
-        center={[-28.128373, -49.471816]}
-        zoom={5.5}
-        scrollWheelZoom={false}
-        style={{ width: "100vw", height: "90vh" }}
-      >
-        {/*<Rectangle bounds={boundsCangucu} pathOptions={{ color: 'red' }}/>*/}
-        {cangucuChecked ? (
-          <Pane style={{ zIndex: 500 }}>
-            <Circle
-              center={[-31.404, -52.701644]}
-              pathOptions={circleOptions}
-              radius={400000}
-              border={false}
-            />
-          </Pane>
-        ) : null}
-        {/*<Rectangle bounds={boundsMorroDaIgreja} pathOptions={{ color: 'black' }}/>*/}
-        {morroDaIgrejaChecked ? (
-          <Pane style={{ zIndex: 500 }}>
-            <Circle
-              center={[-28.128373, -49.471816]}
-              pathOptions={circleOptions}
-              radius={400000}
-              border={false}
-            />
-          </Pane>
-        ) : null}
-        {/*<Rectangle bounds={boundsSantiago} pathOptions={{ color: 'red' }}/>*/}
-        {santiagoChecked ? (
-          <Pane style={{ zIndex: 500 }}>
-            <Circle
-              center={[-29.225213, -54.930257]}
-              pathOptions={circleOptions}
-              radius={400000}
-              border={false}
-            />
-          </Pane>
-        ) : null}
-
-        {stationsVisible == false ? (
-          <>
+      <main>
+        <MenuStation />
+        <div>
+        {data.length > 0 && (
+          <MapContainer
+            center={[-28.128373, -49.471816]}
+            zoom={6.5}
+            scrollWheelZoom={false}
+            style={{ width: "100vw", height: "90vh" }}
+          >
             <Marker
               position={[-33.74, -53.37]}
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>{
-                  handleClickMarker({ target: { options: { id: "83998" } } }),handleClickModal()
-              }}}
-            ></Marker>{" "}
+                click: () =>
+                  handleClickMarker({ target: { options: { id: "83998" } } }),
+              }}
+            >
+                </Marker>{" "}
             {/* CHUÍ */}
             <Marker
               position={[-29.7, -53.68]}
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>{
-                  handleClickMarker({ target: { options: { id: "V0633" } } }),handleClickModal()
-              }}}
-            ></Marker>{" "}
+                click: () =>
+                  handleClickMarker({ target: { options: { id: "V0633" } } }),
+              }}
+            >
+                 <Tooltip direction="bottom" offset={[0, 0]} opacity={1} permanent>
+       {data[0].pressure[0] || 'ok'}
+      </Tooltip></Marker>{" "}
             {/* SANTA MARIA */}
             <Marker
               position={[-29.84, -57.08]}
@@ -1027,89 +855,15 @@ export default function Radar() {
               }}
             ></Marker>
             {/* TRAMANDAÍ */}
-          </>
-        ) : (
-          ""
-        )}
-        <Marker
-          position={[-33.5257, -53.3711]}
-          icon={customMarkerIcon}
-        ></Marker>
-        <Marker position={[-32.035, -52.0986]} icon={customMarkerIcon}></Marker>
-        <Marker
-          position={[-31.3662, -51.9716]}
-          icon={customMarkerIcon}
-        ></Marker>
-        <Marker
-          position={[-29.8262, -50.5179]}
-          icon={customMarkerIcon}
-        ></Marker>
-        {cangucuChecked ? (
-          <>
-            {cangucu.path && (
-              <ImageOverlay
-                bounds={boundsCangucu}
-                url={
-                  handlerSrc ? images[currentImageIndex].cangucu : cangucu.path
-                }
-              />
-            )}{" "}
-          </>
-        ) : null}
-
-        {morroDaIgrejaChecked ? (
-          <>
-            {morroDaIgreja.path && (
-              <ImageOverlay
-                bounds={boundsMorroDaIgreja}
-                url={
-                  handlerSrc
-                    ? images[currentImageIndex].morroDaIgreja
-                    : morroDaIgreja.path
-                }
-              />
-            )}
-          </>
-        ) : null}
-
-        {santiagoChecked ? (
-          <>
-            {santiago.path && (
-              <ImageOverlay
-                bounds={boundsSantiago}
-                url={
-                  handlerSrc
-                    ? images[currentImageIndex].santiago
-                    : santiago.path
-                }
-              />
-            )}{" "}
-          </>
-        ) : null}
-
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      </MapContainer>{" "}
-      <FilterTypeRadar />
-      {clicked &&(
-      <div style={{ display: "flex", flexDirection: "row", height: "100%", zIndex:'800', position: 'relative'}}>
-        <div style={{width:'30%'}}>
-          <Card style={{ flex: "0 0 auto", marginRight: '10px' }} />
+            <Rectangle bounds={bounds} pathOptions={{ color: 'red' }}/>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </MapContainer>)}
+          <Modal/>
+          <button className="js-modal-trigger button is-primary" data-target="modal-js-example">
+  Open JS example modal
+</button>
         </div>
-        <div style={{width:'65%', height:'100%'}}>
-          <MenuStation/>
-
-          <GraphicPressure style={{width:'100%'}}/>
-        </div>
-        <div>
-          <button
-            className="is-danger"
-            onClick={handleCloseModal}
-            style={{ height: '40px', width: '40px', position:'relative' }}
-          >
-            <MdClose />
-          </button>
-        </div>
-    </div>)}
+      </main>
     </>
   );
 }

@@ -13,7 +13,7 @@ export const customMarkerIcon = L.icon({
 
 export const iconStation = L.icon({
   iconUrl : station,
-  iconSize:[12,12]
+  iconSize:[8,8]
 })
 // Substitua os ícones padrão para o ícone personalizado
 delete L.Icon.Default.prototype._getIconUrl;

@@ -5,10 +5,18 @@ export const getImages = async () => {
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
   try {
     const currentHour = new Date().getHours() + 3; //UTC
-    const actualDay = new Date().getDate(); //DIA
+    let actualDay = new Date().getDate(); //DIA
     const actualYear = new Date().getFullYear(); //ANO
-    const actualMonth = new Date().getMonth() + 1; //MES
+    let actualMonth = new Date().getMonth() + 1; //MES
     let initialHour = currentHour - hoursSetting; // HORA INICIAL
+
+    if(actualMonth<10){
+      actualMonth = "0"+ actualMonth
+    }
+
+    if (actualDay<10){
+      actualDay = "0"+actualDay
+    }
 
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
@@ -30,9 +38,9 @@ export const getImages = async () => {
           }
           const data = await response.json();
 
-          const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
-          const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          const santiago = data.data.radar[0].find((item) => item.id === 34);
+          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
+          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
+          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
 
           if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
@@ -56,9 +64,9 @@ export const getImages = async () => {
             throw new Error("Não foi possível obter dados do radar");
           }
           const data = await response.json();
-          const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
-          const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          const santiago = data.data.radar[0].find((item) => item.id === 34);
+          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
+          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
+          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
           if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
               // coloca o objeto com as url's de imagem de radar em listImage
@@ -81,9 +89,9 @@ export const getImages = async () => {
             throw new Error("Não foi possível obter dados do radar");
           }
           const data = await response.json();
-          const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
-          const cangucu = data.data.radar[0].find((item) => item.id === 8);
-          const santiago = data.data.radar[0].find((item) => item.id === 34);
+          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
+          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
+          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
           if (morroDaIgreja && cangucu && santiago) {
             listImage.push({
               // coloca o objeto com as url's de imagem de radar em listImage
@@ -92,7 +100,7 @@ export const getImages = async () => {
               santiago:santiago.path
             });
           }
-          console.log(morroDaIgreja.path)
+          
         }
       }
     }
@@ -114,9 +122,9 @@ export const getImages = async () => {
           throw new Error("Não foi possível obter dados do radar");
         }
         const data = await response.json();
-        const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
-        const cangucu = data.data.radar[0].find((item) => item.id === 8);
-        const santiago = data.data.radar[0].find((item) => item.id === 34);
+        const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
+        const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
+        const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
         
 
 
@@ -143,9 +151,9 @@ export const getImages = async () => {
           throw new Error("Não foi possível obter dados do radar");
         }
         const data = await response.json();
-        const morroDaIgreja = data.data.radar[0].find((item) => item.id === 16);
-        const cangucu = data.data.radar[0].find((item) => item.id === 8);
-        const santiago = data.data.radar[0].find((item) => item.id === 34);
+        const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
+        const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
+        const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
 
         if (morroDaIgreja && cangucu && santiago) {
           listImage.push({

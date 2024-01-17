@@ -1,15 +1,15 @@
 import { useEffect , useState} from "react";
-import { DataINMET } from "../../services/inmet";
+import {  DataINMETAPI } from "../../services/inmet";
 import { WiBarometer } from "react-icons/wi";
 import styles from './card.module.css'
 
 export const CardPressure = () => {
-    const [pressure, setPressure] = useState(null); 
+    const [pressure, setPressure] = useState(null);
 
     useEffect(() => {
         const fetchData = async() => {
           try {
-            const dataMeteorologic = await DataINMET();
+            const dataMeteorologic = await DataINMETAPI();
             setPressure(dataMeteorologic.pressure);
           } catch (error) {
             console.error("Erro ao obter informações do INMET:", error);

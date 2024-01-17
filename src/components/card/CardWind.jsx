@@ -1,5 +1,5 @@
 import { useEffect , useState} from "react";
-import { DataINMET } from "../../services/inmet";
+import { DataINMETAPI } from "../../services/inmet";
 import { WiStrongWind } from "react-icons/wi";
 import styles from './card.module.css'
 import { FiClock } from "react-icons/fi";
@@ -11,7 +11,7 @@ export const CardWind= () => {
     useEffect(() => {
         const fetchData = async() => {
           try {
-            const dataMeteorologic = await DataINMET();
+            const dataMeteorologic = await DataINMETAPI();
             setWind(dataMeteorologic.windSpeed);
             setHour(dataMeteorologic.hour)
           } catch (error) {

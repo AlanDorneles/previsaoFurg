@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import { useEffect, useState} from 'react';
-import { DataINMET } from '../../services/inmet';
+import { DataINMETAPI } from '../../services/inmet';
 import { titleWindSpeed } from "./options";
 
 export const GraphicWindSpeed = () => {
@@ -10,7 +10,7 @@ export const GraphicWindSpeed = () => {
     useEffect(() => {
         const fetchData = async() => {
           try {
-            const dataMeteorologic = await DataINMET();
+            const dataMeteorologic = await DataINMETAPI();
             setWindSpeed(dataMeteorologic.windSpeed);
             setHour(dataMeteorologic.hour)
           } catch (error) {

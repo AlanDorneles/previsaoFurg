@@ -1,27 +1,42 @@
 import ReactApexChart from "react-apexcharts";
 import { useEffect, useState} from 'react';
-import { DataINMET } from '../../services/inmet';
+import { DataINMETAPI } from '../../services/inmet';
 import { titlePressure } from "./options";
+import { useCodeStation } from "../../contexts/codeStation";
 
 export const GraphicPressure = () => {
     const [pressure, setPressure] = useState(null); 
     const [hour, setHour] = useState(null);
+    const {codeStation} = useCodeStation()
+    const storageCodeStation = localStorage.getItem('codeStation')
+    const [trigger,setTrigger] = useState(false)
+
+    useEffect(() => {
+      if (codeStation !== storageCodeStation) {
+        setTrigger(prevTrigger => !prevTrigger);
+      }
+    }, [codeStation, storageCodeStation]);
+
 
     useEffect(() => {
         const fetchData = async() => {
           try {
-            const dataMeteorologic = await DataINMET();
-            console.log(dataMeteorologic)
-            setPressure(dataMeteorologic.pressure);
-            setHour(dataMeteorologic.hour)
+            const dataMeteorologic = await DataINMETAPI();
+            
+            
+            console.log(dataMeteorologic[0].pressure)
+            setPressure(dataMeteorologic[0].pressure);
+            setHour(dataMeteorologic[0].hour)
             console.log(dataMeteorologic.windDirection)
+            console.log(pressure)
+            console.log('hora',hour)
           } catch (error) {
             console.error("Erro ao obter informações do radar:", error);
           }
         };
     
         fetchData();
-      }, []);
+      }, [trigger]);
 
 
   const series = [{
@@ -49,7 +64,7 @@ export const GraphicPressure = () => {
 
   return (
     <div>
-      <ReactApexChart options={options} series={series} type="line" height={300} />
+      <ReactApexChart options={options} series={series} type="line"  />
     </div>
   );
 };
