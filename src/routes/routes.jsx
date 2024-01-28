@@ -10,7 +10,7 @@ export const Root = () => {
         <Routes>
             <Route path="/" element={<Container />} />
             <Route path="/radar" element={<Container />} />
-            <Route path="/estacao" element={<Container/>}></Route>
+            <Route path="/equipe" element={<Container/>}></Route>
             <Route path="/satelite" element={<Container/>}></Route>
         </Routes>
     </BrowserRouter>
