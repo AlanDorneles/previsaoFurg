@@ -83,5 +83,4 @@ export const buttonStyle = {
   color:"white",
   backgroundColor:"#323233"
 }
-export const codesStations = ["A887","A838","B807","A801","A802","A899","A878"]
 export const circleOptions = { color: "#00000000", fillColor: "#00000050" };
