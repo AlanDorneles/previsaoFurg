@@ -5,6 +5,7 @@ import { AiOutlineRadarChart } from "react-icons/ai";
 import { RiBaseStationLine } from "react-icons/ri";
 import { GiSattelite } from "react-icons/gi";
 import '../../sass/navbar.scss'
+import styles from './Navbar.module.css'
 
 
 import { useState } from "react";
@@ -17,40 +18,34 @@ export const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`navbar `}
-    >
-      <div className="navbar-brand">
-        <a className="navbar-item" href="/">
-          <img src={logoFurg} alt="logo-furg" className="image is-40x40" />
+    <nav className={styles.navbar}>
+      <div className={styles.navbarBrand}>
+        <a className={styles.navbarItem} href="/">
+          <img src={logoFurg} alt="logo-furg" className={styles.navbarLogo} />
         </a>
         <div
-          className={`navbar-burger ${isActive ? "is-active" : ""}`}
+          className={`${styles.navbarBurguer} ${isActive ? "is-active" : ""}`}
           onClick={toggleMenu}
         >
-          <span></span>
-          <span></span>
-          <span></span>
         </div>
       </div>
 
-      <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
-        <div className="navbar-start">
-          <Link to="/" className={`navbar-item ` }>
-            <IoHomeOutline/>
+      <div className={`${styles.navbarMenu} ${isActive ? "is-active" : ""}`}>
+        <div className={styles.navbarStart}>
+          <Link to="/" className={styles.navbarItem}>
+            <IoHomeOutline className={styles.Icon} />
               Home
           </Link>
-          <Link to="/radar" className={`navbar-item` }>
-            <AiOutlineRadarChart />
-
+          <Link to="/radar" className={styles.navbarItem}>
+            <AiOutlineRadarChart className={styles.Icon} />
               Radar
           </Link>
-          <Link to="/estacao" className={`navbar-item` }>
-            <RiBaseStationLine />
-              Estações
+          <Link to="/equipe" className={styles.navbarItem}>
+            <RiBaseStationLine className={styles.Icon} />
+              Equipe
           </Link>
-          <Link to="/satelite" className={`navbar-item`}>
-          <GiSattelite/>
+          <Link to="/satelite" className={styles.navbarItem}>
+          <GiSattelite className={styles.Icon}/>
             Satélite
           </Link>
         </div>

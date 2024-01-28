@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  z-index: 1300;
+  width: 100%;
+  bottom: 0%;
+  position: fixed;
+  background-color: white;
+  
+}
+
+.containerCard {
+  width: 30%;
+}
+
+.Card {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+.containerGraphic {
+  width: 65%;
+  height: 100%;
+}
+.GraphicPressure {
+  width: 100%;
+}

@@ -1,15 +1,19 @@
 import ReactApexChart from "react-apexcharts";
 import { useEffect, useState} from 'react';
 import { DataINMETAPI } from '../../services/inmet';
-import { titlePressure } from "./options";
-import { useCodeStation } from "../../contexts/codeStation";
+import { useCodeStation } from "../../contexts/CodeStation";
+import { usePhenomenaContext } from "../../contexts/Phenomena";
+import { variablesPT } from "./variablesPT";
 
-export const GraphicPressure = () => {
-    const [pressure, setPressure] = useState(null); 
+export const Graphic = () => {
+    const {phenomena} = usePhenomenaContext()
+    const [variable, setVariable] = useState(null); 
     const [hour, setHour] = useState(null);
     const {codeStation} = useCodeStation()
     const storageCodeStation = localStorage.getItem('codeStation')
     const [trigger,setTrigger] = useState(false)
+    const [nameVariable, setNameVariable] = useState('Pressão')
+    
 
     useEffect(() => {
       if (codeStation !== storageCodeStation) {
@@ -21,31 +25,38 @@ export const GraphicPressure = () => {
     useEffect(() => {
         const fetchData = async() => {
           try {
+            
             const dataMeteorologic = await DataINMETAPI();
-            
-            
-            console.log(dataMeteorologic[0].pressure)
-            setPressure(dataMeteorologic[0].pressure);
+            setVariable(dataMeteorologic[0][phenomena]);
             setHour(dataMeteorologic[0].hour)
-            console.log(dataMeteorologic.windDirection)
-            console.log(pressure)
-            console.log('hora',hour)
+            setNameVariable(variablesPT[phenomena])
+
           } catch (error) {
             console.error("Erro ao obter informações do radar:", error);
           }
         };
     
         fetchData();
-      }, [trigger]);
+      }, [trigger, phenomena]);
+
+
 
 
   const series = [{
-    name: 'Series 1',
-    data: pressure,
+    name: `${nameVariable}`,
+    data: variable,
+    colors:['#F8A402']
   }];
 
   const options = {
-    ...titlePressure,
+    title: {
+      text: `${nameVariable }`,
+      align: 'center', // ou 'left' ou 'right'
+      style: {
+        fontSize: '16px', // Tamanho da fonte
+        color: '#333' // Cor do texto do título
+      }
+    },
     chart: {
       id: 'chart-line',
     },
@@ -58,8 +69,11 @@ export const GraphicPressure = () => {
       tickAmount:4
     },
     stroke: {
-        curve:'smooth'
-    }
+        curve:'smooth',
+        colors:['#F8A402']
+
+    },
+  
   };
 
   return (
