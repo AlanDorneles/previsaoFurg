@@ -13,7 +13,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { MenuMap } from "../components/menuMap/menuMap.jsx";
 import { Player } from "../components/player/player.jsx";
-import { HourScopeProvider, useHourScope } from "../contexts/hourAnimation.jsx";
+import { HourScopeProvider, useHourScope } from "../contexts/HourAnimation.jsx";
 import { getImages } from "../services/images.js";
 import { customMarkerIcon, iconStation } from "../components/marker/marker.jsx";
 import { circleOptions } from "../constants/constants.js";
@@ -22,12 +22,8 @@ import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
 import { useStationsVisible } from "../contexts/radarFilter.jsx";
 import { useCodeStation } from "../contexts/codeStation.jsx";
-import { Card } from "../components/card/Card.jsx";
 import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
-import { MdClose } from "react-icons/md";
-import { GraphicPressure } from "../components/chart/chartPressure.jsx";
-import { MenuStation } from "../components/menuStation/MenuStation.jsx";
-
+import { Phenomena } from "../components/phenomena/Phenomena.jsx";
 
 export default function Radar() {
   const [morroDaIgreja, setMorroDaIgreja] = useState("");
@@ -45,8 +41,8 @@ export default function Radar() {
   const { stationsVisible } = useStationsVisible();
   const { codeStation, setCodeStation } = useCodeStation();
   const { typeRadar } = useFilterTypeRadarContext();
-  const [clicked, setClicked] = useState(false)
-  const [dataINMET, setDataINMET] = useState([])
+  const [clicked, setClicked] = useState(false);
+  const [dataINMET, setDataINMET] = useState([]);
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {
@@ -72,20 +68,17 @@ export default function Radar() {
   ];
 
   useEffect(() => {
+    console.log('Estado "clicked" foi alterado:', clicked);
+  }, [clicked]);
 
-        console.log('Estado "clicked" foi alterado:', clicked);
-      }, [clicked]);
-
-
- const handleClickModal =  () => {
-        setClicked(true)
-        console.log(clicked)
-
-  }
+  const handleClickModal = () => {
+    setClicked(true);
+    console.log(clicked);
+  };
 
   const handleCloseModal = () => {
-        setClicked(false)
-  }
+    setClicked(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,8 +98,8 @@ export default function Radar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataINMET = await DataINMETAPI()
-        setDataINMET(dataINMET)
+        const dataINMET = await DataINMETAPI();
+        setDataINMET(dataINMET);
       } catch (error) {
         console.error("Erro ao obter informações do radar:", error);
       }
@@ -228,9 +221,11 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>{
-                  handleClickMarker({ target: { options: { id: "83998" } } }),handleClickModal()
-              }}}
+                click: () => {
+                  handleClickMarker({ target: { options: { id: "83998" } } }),
+                    handleClickModal();
+                },
+              }}
             ></Marker>{" "}
             {/* CHUÍ */}
             <Marker
@@ -238,9 +233,11 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>{
-                  handleClickMarker({ target: { options: { id: "V0633" } } }),handleClickModal()
-              }}}
+                click: () => {
+                  handleClickMarker({ target: { options: { id: "V0633" } } }),
+                    handleClickModal();
+                },
+              }}
             ></Marker>{" "}
             {/* SANTA MARIA */}
             <Marker
@@ -248,8 +245,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A809" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>{" "}
             {/*URUGUAIANA */}
@@ -258,8 +257,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A802" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* RIO GRANDE */}
@@ -268,8 +269,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A836" } } }),
+                    handleClickModal();
+                },
               }}
             >
               <Tooltip direction="bottom" offset={[0, 0]} opacity={1} permanent>
@@ -282,8 +285,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0615" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* HERVAL */}
@@ -292,8 +297,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0628" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* PELOTAS */}
@@ -302,8 +309,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0630" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* PIRATINI */}
@@ -312,8 +321,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0629" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* PINHEIRO MACHADO */}
@@ -322,8 +333,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0616" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* HULHA NEGRA */}
@@ -332,8 +345,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A827" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* BAGÉ*/}
@@ -342,8 +357,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A881" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* DOM PEDRITO*/}
@@ -352,8 +369,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A804" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SANTANA DO LIVRAMENTO*/}
@@ -362,8 +381,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0618" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ITAQUI*/}
@@ -372,8 +393,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0619" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ITAQUI VMAER*/}
@@ -382,8 +405,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0623" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* MACAMBARÁ*/}
@@ -392,8 +417,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A826" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ALEGRETE*/}
@@ -402,8 +429,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0632" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ROSÁRIO DO SUL*/}
@@ -412,8 +441,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A832" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO GABRIEL*/}
@@ -422,8 +453,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0638" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO GABRIEL*/}
@@ -432,8 +465,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0622" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* LAVRAS DO SUL*/}
@@ -442,8 +477,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0604" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAÇAPAVA DO SUL (MINAS DO CAMAQUÃ)*/}
@@ -452,8 +489,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0608" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CANGUÇU OLIVAL CAPOLIVO*/}
@@ -462,8 +501,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A811" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CANGUÇU*/}
@@ -472,8 +513,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0639" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO LOURENÇO DO SUL*/}
@@ -482,8 +525,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A838" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAMAQUÃ*/}
@@ -492,8 +537,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0601" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* BARRA DO RIBEIRO*/}
@@ -502,8 +549,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0612" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ENCRUZILHADA DO SUL*/}
@@ -512,8 +561,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A812" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAÇAPAVA DO SUL*/}
@@ -522,8 +573,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0603" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAÇAPAVA DO SUL (COSTI OLIVOS)*/}
@@ -532,8 +585,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0640" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO SEPÉ*/}
@@ -542,8 +597,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A833" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SANTIAGO*/}
@@ -552,8 +609,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0620" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* JAGUARI ( MIRANTE MINUZZI)*/}
@@ -562,8 +621,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A889" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO VICENTE DO SUL*/}
@@ -572,8 +633,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0605" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CACHOEIRA DO SUL (CAPANE)*/}
@@ -582,8 +645,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0606" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CACHOEIRA DO SUL (CASA AZUL)*/}
@@ -592,8 +657,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A813" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* RIO PARDO*/}
@@ -602,8 +669,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0626" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* MINAS DO LEÃO*/}
@@ -612,8 +681,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0643" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* TAQUARI*/}
@@ -622,8 +693,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0627" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* MONTENEGRO*/}
@@ -632,8 +705,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0645" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* VENÂNCIO AIRES*/}
@@ -642,8 +717,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0642" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SOBRADINHO*/}
@@ -652,8 +729,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0621" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* JULIO DE CASTILHOS*/}
@@ -662,8 +741,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A886" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* TUPANCIRETÃ*/}
@@ -672,8 +753,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0602" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* BOSSOROCA*/}
@@ -682,8 +765,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A852" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO LUIZ GONZAGA*/}
@@ -692,8 +777,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0636" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO BORJA ( TERRA DO SOL)*/}
@@ -702,8 +789,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0635" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO BORJA ( DDPA)*/}
@@ -712,8 +801,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A830" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO BORJA */}
@@ -722,8 +813,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0610" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CERRO LARGO */}
@@ -732,8 +825,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0634" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SANTO ÂNGELO */}
@@ -742,8 +837,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A853" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CRUZ ALTA  */}
@@ -752,8 +849,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A883" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* IBIRUBÁ */}
@@ -762,8 +861,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A837" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SOLEDADE */}
@@ -772,8 +873,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0617" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ILÓPOLIS(IBRAMATE) */}
@@ -782,8 +885,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A882" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* TEUTÔNIA */}
@@ -792,8 +897,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A840" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* BENTO GONÇALVES */}
@@ -802,8 +909,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0646" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* VERANÓPOLIS */}
@@ -812,8 +921,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A894" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SERAFINA CORRÊA */}
@@ -822,8 +933,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0609" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAXIAS DO SUL  */}
@@ -832,8 +945,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0637" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO FRANCISCO DE PAULA */}
@@ -842,8 +957,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A879" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/*CANELA  */}
@@ -852,8 +969,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A884" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAMPO BOM  */}
@@ -862,8 +981,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0613" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* ESTEIO  */}
@@ -872,8 +993,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0631" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* PORTO VERA CRUZ  */}
@@ -882,8 +1005,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A805" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SANTO AUGUSTO  */}
@@ -892,8 +1017,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A856" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* PALMEIRAS DAS MISSÕES */}
@@ -902,8 +1029,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0641" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SARANDI  */}
@@ -912,8 +1041,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A854" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* FREDERICO WESTPHALEN */}
@@ -922,8 +1053,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0614" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* GETULIO VARGAS  */}
@@ -932,8 +1065,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0644" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* VACARIA  */}
@@ -942,8 +1077,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A880" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* VACARIA  */}
@@ -952,8 +1089,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0607" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CACHOEIRINHA  */}
@@ -962,8 +1101,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0647" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* VIAMÃO  */}
@@ -972,8 +1113,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "B807" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* POA - BELEM NOVO  */}
@@ -982,8 +1125,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A829" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* SÃO JOSÉ DOS AUSENTES */}
@@ -992,8 +1137,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A897" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* CAMBARA DO SUL */}
@@ -1002,8 +1149,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A808" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* TORRES */}
@@ -1012,8 +1161,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "V0625" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* MAQUINÉ */}
@@ -1022,8 +1173,10 @@ export default function Radar() {
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
-                click: () =>
+                click: () => {
                   handleClickMarker({ target: { options: { id: "A834" } } }),
+                    handleClickModal();
+                },
               }}
             ></Marker>
             {/* TRAMANDAÍ */}
@@ -1090,26 +1243,7 @@ export default function Radar() {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       </MapContainer>{" "}
       <FilterTypeRadar />
-      {clicked &&(
-      <div style={{ display: "flex", flexDirection: "row", height: "100%", zIndex:'800', position: 'relative'}}>
-        <div style={{width:'30%'}}>
-          <Card style={{ flex: "0 0 auto", marginRight: '10px' }} />
-        </div>
-        <div style={{width:'65%', height:'100%'}}>
-          <MenuStation/>
-
-          <GraphicPressure style={{width:'100%'}}/>
-        </div>
-        <div>
-          <button
-            className="is-danger"
-            onClick={handleCloseModal}
-            style={{ height: '40px', width: '40px', position:'relative' }}
-          >
-            <MdClose />
-          </button>
-        </div>
-    </div>)}
+      {clicked && <Phenomena handleCloseModal={handleCloseModal} />}
     </>
   );
 }
