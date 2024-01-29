@@ -24,6 +24,7 @@ import { useStationsVisible } from "../contexts/radarFilter.jsx";
 import { useCodeStation } from "../contexts/codeStation.jsx";
 import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
 import { Phenomena } from "../components/phenomena/Phenomena.jsx";
+import { bounds } from "../constants/bounds.js";
 
 export default function Radar() {
   const [morroDaIgreja, setMorroDaIgreja] = useState("");
@@ -52,20 +53,6 @@ export default function Radar() {
     }
   };
   console.log(typeRadar);
-
-  const boundsMorroDaIgreja = [
-    [-24.5, -53.5],
-    [-31.7, -45.5],
-  ];
-  const boundsCangucu = [
-    [-27.8, -57],
-    [-35, -48.5],
-  ];
-
-  const boundsSantiago = [
-    [-25.6, -59.1],
-    [-32.8, -50.8],
-  ];
 
   useEffect(() => {
     console.log('Estado "clicked" foi alterado:', clicked);
@@ -180,7 +167,7 @@ export default function Radar() {
         scrollWheelZoom={false}
         style={{ width: "100vw", height: "90vh" }}
       >
-        {/*<Rectangle bounds={boundsCangucu} pathOptions={{ color: 'red' }}/>*/}
+        {/*<Rectangle bounds={bounds.cangucu} pathOptions={{ color: 'red' }}/>*/}
         {cangucuChecked ? (
           <Pane style={{ zIndex: 500 }}>
             <Circle
@@ -191,7 +178,7 @@ export default function Radar() {
             />
           </Pane>
         ) : null}
-        {/*<Rectangle bounds={boundsMorroDaIgreja} pathOptions={{ color: 'black' }}/>*/}
+        {/*<Rectangle bounds={bounds.morroDaIgreja} pathOptions={{ color: 'black' }}/>*/}
         {morroDaIgrejaChecked ? (
           <Pane style={{ zIndex: 500 }}>
             <Circle
@@ -202,7 +189,7 @@ export default function Radar() {
             />
           </Pane>
         ) : null}
-        {/*<Rectangle bounds={boundsSantiago} pathOptions={{ color: 'red' }}/>*/}
+        {/*<Rectangle bounds={bounds.santiago} pathOptions={{ color: 'red' }}/>*/}
         {santiagoChecked ? (
           <Pane style={{ zIndex: 500 }}>
             <Circle
@@ -1201,7 +1188,7 @@ export default function Radar() {
           <>
             {cangucu.path && (
               <ImageOverlay
-                bounds={boundsCangucu}
+                bounds={bounds.cangucu}
                 url={
                   handlerSrc ? images[currentImageIndex].cangucu : cangucu.path
                 }
@@ -1214,7 +1201,7 @@ export default function Radar() {
           <>
             {morroDaIgreja.path && (
               <ImageOverlay
-                bounds={boundsMorroDaIgreja}
+                bounds={bounds.morroDaIgreja}
                 url={
                   handlerSrc
                     ? images[currentImageIndex].morroDaIgreja
@@ -1229,7 +1216,7 @@ export default function Radar() {
           <>
             {santiago.path && (
               <ImageOverlay
-                bounds={boundsSantiago}
+                bounds={bounds.santiago}
                 url={
                   handlerSrc
                     ? images[currentImageIndex].santiago
