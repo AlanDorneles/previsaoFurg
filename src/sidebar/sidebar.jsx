@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import logoFurg from "../../../public/logo-furg.png";
+import logoFurg from "../../public/logo-furg.png";
 import { IoHomeOutline } from "react-icons/io5";
 import { GiSattelite } from "react-icons/gi";
-import '../../sass/navbar.scss'
-import styles from './Navbar.module.css'
-
-
+import '../sass/navbar.scss'
+import styles from './sidebar.module.css'
 import { useState } from "react";
 
 export const Navbar = () => {

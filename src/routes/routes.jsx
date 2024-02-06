@@ -9,8 +9,6 @@ export const Root = () => {
         <Navbar />
         <Routes>
             <Route path="/" element={<Container />} />
-            <Route path="/radar" element={<Container />} />
-            <Route path="/equipe" element={<Container/>}></Route>
             <Route path="/satelite" element={<Container/>}></Route>
         </Routes>
     </BrowserRouter>

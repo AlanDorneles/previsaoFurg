@@ -1,0 +1,15 @@
+.container{
+    width: 100vw;
+    display: flex;
+    height: calc(100vh - 52px);
+    max - height:100vh;
+    
+}
+.primary{
+    background-color: #F8BC2A!important;
+}
+.sec{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
