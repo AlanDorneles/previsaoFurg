@@ -1,17 +1,16 @@
 import { useLocation } from "react-router-dom";
-import Radar from "../../pages/Radar";
-import Home from "../../pages/Home";
+import Radar from "../../pages/Home";
 import Satellite from "../../pages/Sattelite";
-import Team from "../../pages/Team";
+import { Navbar } from "../navbar/navbar";
+
 
 export default function Container() {
   const location = useLocation();
   return (
     <>
+      <Navbar/>
       <section>
-        {location.pathname ==='/' && <Home/>}
-        {location.pathname === "/radar" && <Radar />}
-        {location.pathname === '/equipe' && <Team/>}
+        {location.pathname ==='/' && <Radar/>}
         {location.pathname === '/satelite' && <Satellite/>}
       </section>
     </>

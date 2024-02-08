@@ -1,6 +1,7 @@
 import { apiKeyRedeMet} from "../constants/constants";
 
-export const getImages = async () => {
+export const getImages = async (typeRadar) => {
+  console.log('radar:',typeRadar)
   const listImage = []; // array de urls
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
   try {
@@ -31,7 +32,7 @@ export const getImages = async () => {
         //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
         for (let h = hourLastDay; h <= 23; h++) {
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -58,7 +59,7 @@ export const getImages = async () => {
         for (let h = 0; h <= newHour; h++) {
           //percorre da hora inicial até a hora atual
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${nextDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${nextDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -83,7 +84,7 @@ export const getImages = async () => {
 
           //percorre da hora inicial até a hora atual
           const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
+            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
           );
           if (!response.ok) {
             throw new Error("Não foi possível obter dados do radar");
@@ -116,7 +117,7 @@ export const getImages = async () => {
       for (let h = initialHour; h <= 23; h++) {
         
         const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${previousDay}${h}`
+          `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${previousDay}${h}`
         );
         if (!response.ok) {
           throw new Error("Não foi possível obter dados do radar");
@@ -145,7 +146,7 @@ export const getImages = async () => {
         console.log('hora final:',currentHour)
         console.log('dia inicial:', actualDay)
         const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
+          `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
         );
         if (!response.ok) {
           throw new Error("Não foi possível obter dados do radar");

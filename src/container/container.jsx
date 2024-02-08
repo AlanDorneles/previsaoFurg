@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Satellite from "../pages/Sattelite";
-import Radar from "../pages/Radar";
+import Radar from "../pages/Home";
 
 
 

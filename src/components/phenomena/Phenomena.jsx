@@ -17,7 +17,7 @@ export const Phenomena = ({handleCloseModal}) => {
             <MenuStation/>
             <Graphic className={styles.GraphicPressure}/>
             </div>
-            <div>
+            <div className={styles.close}>
             <button
                 className="button is-danger"
                 onClick={handleCloseModal}

@@ -3,7 +3,7 @@
   flex-direction: row;
   height: 100%;
   z-index: 1300;
-  width: 100%;
+  width: 80%;
   bottom: 0%;
   position: fixed;
   background-color: white;
@@ -17,6 +17,12 @@
 .Card {
   flex: 0 0 auto;
   margin-right: 10px;
+}
+
+.close{
+  position:absolute;
+  top:2%;
+  right:5%;
 }
 
 .containerGraphic {
