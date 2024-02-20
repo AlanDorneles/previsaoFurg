@@ -1,15 +1,13 @@
 import { Route, Routes} from "react-router";
-import Container from "../components/container/container"
 import { BrowserRouter } from "react-router-dom";
-import { Navbar } from "../components/navbar/navbar";
+import Home from "../pages/Home";
 
 export const Root = () => {
     return(
     <BrowserRouter>
-        <Navbar />
         <Routes>
-            <Route path="/" element={<Container />} />
-            <Route path="/satelite" element={<Container/>}></Route>
+            <Route path="/" element={<Home />}/>
+            <Route path='/satelite' element={<Home/>}/>
         </Routes>
     </BrowserRouter>
     )

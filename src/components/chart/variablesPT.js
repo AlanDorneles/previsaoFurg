@@ -5,6 +5,7 @@ export const variablesPT = {
     tempMax:'Temperatura Máxima',
     humidity:'Umidade',
     windBurst:'Rajada de Vento',
-    windSpeed:'Velocidade do Vento'
+    windSpeed:'Velocidade do Vento',
+    degree:"Direção do vento"
 
 }

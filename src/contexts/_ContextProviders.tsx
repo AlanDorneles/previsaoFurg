@@ -5,6 +5,7 @@ import { PreviousAndNextImageProvider } from "./PreviousAndNextImage.jsx";
 import { StationsVisibleProvider } from "./RadarFilter.jsx";
 import { CodeStationsProvider } from "./CodeStation.jsx";
 import { FilterTypeRadarProvider } from "./TypeRadar.jsx";
+import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
 import { PhenomenaProvider } from './Phenomena.jsx';
 
 interface CombinedProvidersProps {
@@ -20,7 +21,9 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
             <CodeStationsProvider>
               <FilterTypeRadarProvider>
                 <PhenomenaProvider>
-                  {children}
+                  <RadarOrSateliteProvider>
+                    {children}
+                  </RadarOrSateliteProvider>
                 </PhenomenaProvider>
               </FilterTypeRadarProvider>
             </CodeStationsProvider>

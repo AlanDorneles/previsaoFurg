@@ -21,7 +21,7 @@ export const MenuStation = () =>{
                             <option value={'tempMin'}>Temperatura Mínima (ºC)</option>
                             <option value={'tempMax'}>Temperatura Máxima (ºC)</option>
                             <option value={'humidity'}>Umidade (%)</option>
-                            <option value={'windDir'}>Direção do Vento (º)</option>
+                            <option value={'degree'}>Direção do Vento (º)</option>
                             <option value={'windSpeed'}>Velocidade do vento (m/s)</option>
                             <option value={'windBurst'}>Rajada de vento (m/s)</option>
                         </select>

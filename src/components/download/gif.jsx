@@ -11,7 +11,6 @@ export const DownloadGif = ({disabledButton}) => {
 
   },[disabledButton])
 
-  console.log('disabled', disabledButton)
   return (
     <>
       <div className={`block ${styles.block} `}>

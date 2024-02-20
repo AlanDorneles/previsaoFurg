@@ -11,8 +11,9 @@ import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
 import { Map } from "../components/map/Map.jsx";
 import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
+import Satellite from "./Sattelite.jsx";
 
-export default function Radar() {
+export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
@@ -34,7 +35,6 @@ export default function Radar() {
       setHandlerSrc(false);
     }
   };
-  console.log(dataINMET, typeRadar);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +52,7 @@ export default function Radar() {
   const playImages = async () => {
     const images = await getImages(typeRadar);
     setImages(images);
-    console.log(images);
+
     setDisabledButton(true)
 
     let currentIndex = 0; // Use o índice atual de imagem como ponto de partida
@@ -91,7 +91,6 @@ export default function Radar() {
     } else {
       setCount(count - 1);
       setCurrentImageIndex(count - 1); ///GATILHO PARA MUDANÇA DE IMAGEM
-      console.log("OK");
     }
   };
 
@@ -115,6 +114,9 @@ export default function Radar() {
           nextImage={nextImage}
           previousImage={previousImage}
         />
+      
+    
+        {location.pathname === "/" && 
         <section className={styles.map}>
           <Map
             cangucuChecked={cangucuChecked}
@@ -124,7 +126,10 @@ export default function Radar() {
             images={images}
             currentImageIndex={currentImageIndex}
           />
-        </section>
+        </section>}
+        <section> 
+        {location.pathname === "/satelite" && <Satellite />}
+      </section>
         <DownloadGif disabledButton={disabledButton}/>
       </main>
     </>

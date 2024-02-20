@@ -1,4 +1,4 @@
-import {MapContainer,TileLayer,Circle,Pane,ImageOverlay,/*Rectangle,*/ Marker,Tooltip,} from "react-leaflet";
+import {MapContainer,TileLayer,Circle,Pane,ImageOverlay,/*Rectangle,*/ Marker} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { customMarkerIcon, iconStation } from "../marker/marker.jsx";
 import { circleOptions } from "../../constants/constants.js";
@@ -48,13 +48,11 @@ export const Map = ({cangucuChecked, santiagoChecked,morroDaIgrejaChecked, handl
       }, []);
     const handleClickModal = () => {
         setClicked(true);
-        console.log(clicked);
+        
       };
       const handleClickMarker = (event) => {
         const { id } = event.target.options;
-        console.log(`Clicou no Marker com id: ${id}`);
-        setCodeStation(id);
-        console.log(codeStation);
+        setCodeStation(id); 
       };
   return (
     <>
@@ -168,9 +166,6 @@ export const Map = ({cangucuChecked, santiagoChecked,morroDaIgrejaChecked, handl
               },
             }}
           >
-            <Tooltip direction="bottom" offset={[0, 0]} opacity={1} permanent>
-              972bar
-            </Tooltip>
           </Marker>
           {/* JAGUARÃO */}
           <Marker
@@ -1135,7 +1130,7 @@ Map.propTypes = {
     cangucuChecked: PropTypes.bool.isRequired,
     santiagoChecked: PropTypes.bool.isRequired,
     morroDaIgrejaChecked: PropTypes.bool.isRequired,
-    handlerSrc: PropTypes.string.isRequired,
+    handlerSrc: PropTypes.bool.isRequired,
     images: PropTypes.array.isRequired,
     currentImageIndex: PropTypes.number.isRequired,
 };

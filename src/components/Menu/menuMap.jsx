@@ -12,6 +12,7 @@ import LogoFurg from "../../../public/logo-furg.png";
 export const MenuMap = ({ selectImage }) => {
   const { getHourScope, handleSelectChange } = useHourScope();
   const actualHour = new Date().getHours();
+  console.log(`hora atual:`, actualHour)
   const [initHour, setInitHour] = useState(6);
   const [clickedButtonId, setClickedButtonId] = useState();
   const {
@@ -47,7 +48,7 @@ export const MenuMap = ({ selectImage }) => {
   const selectIndex = (index) => {
     setClickHoursIndexImage(index);
     selectImage();
-    console.log("indice da imagem MenuMap", indexImage);
+    //console.log("indice da imagem MenuMap", indexImage);
     setClickedButtonId(indexImage);
   };
 
@@ -82,10 +83,11 @@ export const MenuMap = ({ selectImage }) => {
           <div style={{ display: "flex" }}>
             <div className="buttons" id="buttons">
               {Array.from({ length: actualHour - initHour }, (_, index) => {
+                console.log(length)
                 const hour = index + initHour + 1;
                 const isClicked = clickedButtonId === index;
                 return (
-                  <>
+                  
                     <button
                       className={`button is-outlined is-small ${styles.button}`}
                       onClick={() => {
@@ -93,12 +95,13 @@ export const MenuMap = ({ selectImage }) => {
                       }}
                       id={index}
                       style={{ ...(isClicked && buttonStyle) }}
+                      key={`button_${index}`}
                     >
                       {hour < 0
                         ? `${(-24 - hour) * -1}:00 Dia Ant.`
                         : `${hour}:00`}
+                     
                     </button>
-                  </>
                 );
               })}
             </div>

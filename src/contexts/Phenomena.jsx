@@ -8,8 +8,6 @@ export const PhenomenaProvider = ({ children }) => {
     setPhenomena(selectedValue);
   };
   localStorage.setItem("phenomena", phenomena)
-  console.log(phenomena)
-
 
   return (
     <PhenomenaContext.Provider value={{ phenomena, handleSelectChange }}>
@@ -23,5 +21,5 @@ export const usePhenomenaContext = () => {
 };
 
 PhenomenaProvider.propTypes = {
-    children: PropTypes.string
+    children: PropTypes.object
 }

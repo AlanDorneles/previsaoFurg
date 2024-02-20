@@ -4,7 +4,6 @@ import { formattedDataFinal } from "../utils/formattedData";
 export const DataINMETAPI = async () => {
   const DataINMET = [];
   const codeStation = localStorage.getItem('codeStation')
-  console.log('código da estação')
   const response = await fetch(
     `https://apitempo.inmet.gov.br/token/estacao/${formattedDataFinal}/${formattedDataFinal}/${codeStation}/${apiINMETKey}`
   );
@@ -12,7 +11,7 @@ export const DataINMETAPI = async () => {
     throw new Error("Não foi possível obter dados do inmet");
   }
   const data = await response.json();
-  console.log(data)
+ 
 
   const windDegreesToDirection = (degree) => {
     let degreeNumber = Number(degree.VEN_DIR);
@@ -57,6 +56,7 @@ export const DataINMETAPI = async () => {
   const windBurst = filteredData.map((item) => item.VEN_RAJ);
   const humidity = filteredData.map((item) => item.UMD_INS);
   const name = filteredData.map((item) => item.DC_NOME)
+  const degree = filteredData.map((item) => item.VEN_DIR)
 
   DataINMET.push({
     station,
@@ -69,9 +69,9 @@ export const DataINMETAPI = async () => {
     tempMax,
     windBurst,
     humidity,
-    name
+    name,
+    degree
   });
-  console.log('DataINMET',DataINMET);
 
   return DataINMET;
 };

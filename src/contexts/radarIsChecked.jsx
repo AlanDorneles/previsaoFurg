@@ -30,9 +30,7 @@ export const RadarIsCheckedProvider = ({ children }) => {
     handleMorroDaIgrejaChange,
     handleSantiagoChange,
   };
-  console.log(radarChecked.cangucuChecked,
-    radarChecked.morroDaIgrejaChecked,
-    radarChecked.santiagoChecked)
+
   return (
     <RadarIsChecked.Provider value={radarChecked}>
       {children}

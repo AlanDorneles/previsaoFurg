@@ -30,6 +30,7 @@ export const Graphic = () => {
             setVariable(dataMeteorologic[0][phenomena]);
             setHour(dataMeteorologic[0].hour)
             setNameVariable(variablesPT[phenomena])
+            console.log('aqui', dataMeteorologic[0])
 
           } catch (error) {
             console.error("Erro ao obter informações do radar:", error);
@@ -73,6 +74,11 @@ export const Graphic = () => {
         colors:['#F8A402']
 
     },
+    markers:{
+      size:8,
+      content:"A"
+
+    }
   
   };
 
