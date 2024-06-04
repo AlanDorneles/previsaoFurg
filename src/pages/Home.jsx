@@ -3,7 +3,7 @@ import { useEffect, useState,useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import { MenuMap } from "../components/menuMap/menuMap.jsx";
 import { Player } from "../components/player/player.jsx";
-import { HourScopeProvider, useHourScope } from "../contexts/HourAnimation.jsx";
+import { HourScopeProvider, useHourScope } from "../contexts/hourAnimation.jsx";
 import { getImages } from "../services/images.js";
 import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";

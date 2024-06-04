@@ -1,6 +1,6 @@
 import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
 import { useState,useEffect} from "react";
-import { useHourScope } from "../../contexts/HourAnimation";
+import { useHourScope } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import { buttonStyle } from "../../constants/constants";
 import PropTypes from "prop-types";
