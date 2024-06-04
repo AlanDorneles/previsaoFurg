@@ -1,23 +1,40 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, ImageOverlay} from "react-leaflet";
-import { getImagesFromSatellite } from "../services/sattelite.js";
+import { useState } from "react";
 import { MenuSatelite } from "../components/menuSatelite/MenuSatelite.jsx";
+import { CPPMETImages } from "../services/cpmetUFPEL.js";
+//import { MapContainer, TileLayer, ImageOverlay} from "react-leaflet";
+//import { getImagesFromSatellite } from "../services/sattelite.js";
+//import { divIcon } from "leaflet";
+
 
 export default function Satellite() {
-  const bounds = [
+  const imagesCPP = CPPMETImages();
+  const [index, setIndex] = useState(0);
+  const [image, setImage] = useState()
+
+  setInterval(()=>{
+    if(index > imagesCPP.length){
+      setIndex(0)
+      setImage(imagesCPP[0])
+    }
+    setIndex(index+1)
+    setImage(imagesCPP[index])
+  },10000)
+
+  console.log(index)
+/*  const bounds = [
     [-56, -100],
     [12.52, -25.24],
   ];
-  const [date,setDate] = useState("")
   const [imageRealcada, setImageRealcada] = useState("");
   const [imageVis, setImageVis] = useState("");
   const [imageIr, setImageIr] = useState("");
   const [selectedOption, setSelectedOption] = useState("realçada");
 
-  
+  console.log(typeof date)
   const handleSelectedOptionChange = (newOption) => {
     setSelectedOption(newOption);
   };
+  
 
   useEffect(() => {
     const data = async () => {
@@ -29,23 +46,28 @@ export default function Satellite() {
         setImageRealcada(dataRealcada.data.satelite[0].path);
         setImageVis(dataVis.data.satelite[0].path);
         setImageIr(dataIr.data.satelite[0].path);
-        setDate(dataIr.data.satelite[0].data);
         console.log(images);
       } catch (error) {
         console.error("Erro ao obter a imagem do satélite:", error);
       }
     };
     data();
-  }, []);
-
+  }, []);*/
+   
   return (
     <>
       <MenuSatelite
-        selectedOption={selectedOption}
-        onOptionChange={handleSelectedOptionChange}
-        getDate = {date}
+        /*selectedOption={selectedOption}
+        onOptionChange={handleSelectedOptionChange}*/
       />
-      <MapContainer
+     
+      <div>
+        <img src={image}/>
+      </div>
+
+
+
+      {/*<MapContainer
         center={[-28.128373, -49.471816]}
         zoom={4}
         scrollWheelZoom={false}
@@ -62,7 +84,7 @@ export default function Satellite() {
           <ImageOverlay bounds={bounds} url={imageRealcada} />
         )}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      </MapContainer>
+        </MapContainer>*/}
     </>
   );
 }

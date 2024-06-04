@@ -2,7 +2,7 @@ import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
 import { useState,useEffect} from "react";
 import { useHourScope } from "../../contexts/HourAnimation";
 import styles from "./menuMap.module.css";
-import { buttonStyle } from "../../constants/constants";
+import { buttonStyle } from "../../constants/constants"; 
 import PropTypes from "prop-types";
 import { UseRadarIsChecked } from "../../contexts/radarIsChecked";
 import { UsePreviousAndNextImage } from "../../contexts/previousAndNextImage";
@@ -50,7 +50,6 @@ export const MenuMap = ({ selectImage }) => {
       setInitHour(initIndex);
     }
     
-
     setInitHour(initIndex);
   
     selectIndex(0);
@@ -84,7 +83,7 @@ export const MenuMap = ({ selectImage }) => {
     <>
       <div className={styles.container}>
         <div>
-          <div className={`tabs is-centered ${styles.containerTabs}`}>
+          <div className={`tabs ${styles.containerTabs}`}>
             <ul>
               <li
                 className={`${selectTab.radar ? "is-active" : ""}`}
@@ -265,7 +264,20 @@ export const MenuMap = ({ selectImage }) => {
             </>
           ) : (
             <div className={styles.containerRadar}>
-              <MenuSatelite/>
+              <div className={styles.containerSelect}>
+                <h6 className="title is-6">Horas</h6>
+                <div className="select is-primary">
+                  <select
+                    id="selectAnimation"
+                    onChange={handleChange}
+                    value={getHourScope}
+                  >
+                    <option value={1}>1 hora</option>
+                    <option value={2}>2 horas</option>
+                    <option value={3}>3 horas</option>
+                  </select>
+                </div>
+              </div>
               <h6 className="title is-6">Satélite</h6>
               <label className="radio">
                 <input type="radio" name="answer" />

@@ -13,10 +13,7 @@ export const Player = ({playGif, pauseGif, nextImage, previousImage}) => {
             setIsPlay(false)
         }
     }
-
-    
-    
-     
+  
     return(
     <div className={`block ${styles.block}`}>
         <div className={styles.container}>
