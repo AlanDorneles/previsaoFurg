@@ -1,7 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import { useEffect, useState} from 'react';
 import { DataINMETAPI } from '../../services/inmet';
-import { useCodeStation } from "../../contexts/CodeStation";
+import { useCodeStation } from "../../contexts/codeStation";
 import { usePhenomenaContext } from "../../contexts/Phenomena";
 import { variablesPT } from "./variablesPT";
 
