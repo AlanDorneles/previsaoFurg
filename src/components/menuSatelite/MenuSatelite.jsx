@@ -9,7 +9,7 @@ export const MenuSatelite = ({ selectedOption, onOptionChange, getDate }) => {
     onOptionChange(value);
     console.log(value);
   };
-
+  console.log(getDate)
   useEffect(() => {
     const date = getDate.indexOf(getDate.slice(11, 13));
     const hour = parseInt(getDate.slice(11, 13));
@@ -72,7 +72,7 @@ export const MenuSatelite = ({ selectedOption, onOptionChange, getDate }) => {
               checked={selectedOption === "vis"}
               onChange={handleRadioButtonChange}
             />
-            VISUAL
+            VISÍVEL
           </label>
         </div>
       </div>
@@ -108,5 +108,5 @@ export const MenuSatelite = ({ selectedOption, onOptionChange, getDate }) => {
 MenuSatelite.propTypes = {
   selectedOption: PropTypes.string,
   onOptionChange: PropTypes.func,
-  getDate: PropTypes.string,
+  getDate: PropTypes.any,
 };

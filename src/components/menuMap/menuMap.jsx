@@ -73,7 +73,6 @@ export const MenuMap = ({ selectImage }) => {
     setSelectTab((prevState) => ({
       radar: !prevState.radar,
       sattelite: !prevState.sattelite,
-
     }));};
 
     useEffect(() => {

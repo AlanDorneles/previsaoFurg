@@ -8,11 +8,13 @@ export default function Satellite() {
     [-56, -100],
     [12.52, -25.24],
   ];
+  const [date,setDate] = useState("")
   const [imageRealcada, setImageRealcada] = useState("");
   const [imageVis, setImageVis] = useState("");
   const [imageIr, setImageIr] = useState("");
   const [selectedOption, setSelectedOption] = useState("realçada");
-  const [date,setDate] = useState("")
+
+  
   const handleSelectedOptionChange = (newOption) => {
     setSelectedOption(newOption);
   };
@@ -42,7 +44,6 @@ export default function Satellite() {
         selectedOption={selectedOption}
         onOptionChange={handleSelectedOptionChange}
         getDate = {date}
-
       />
       <MapContainer
         center={[-28.128373, -49.471816]}
